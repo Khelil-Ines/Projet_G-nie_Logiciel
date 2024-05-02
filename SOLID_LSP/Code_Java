@@ -1,0 +1,53 @@
+class Utilisateur {
+    protected String nom;
+    protected String email;
+
+    public Utilisateur(String nom, String email) {
+        this.nom = nom;
+        this.email = email;
+    }
+
+    public void modifierProfil(String nom, String email) {
+        this.nom = nom;
+        this.email = email;
+        System.out.println("Profil mis à jour pour: " + nom);
+    }
+}
+
+class RH extends Personnel {
+    public RH(String nom, String email) {
+        super(nom, email);
+    }
+
+    @Override
+    public void modifierProfil(String nom, String email) {
+        //appelle d'abord la méthode de la superclasse
+        super.modifierProfil(nom, email);
+        // Logique supplémentaire spécifique à RH
+        System.out.println("Mise à jour spécifique du profil RH pour: " + nom);
+    }
+}
+
+class Employee extends Personnel {
+    public Employee(String nom, String email) {
+        super(nom, email);
+    }
+
+    @Override
+    public void modifierProfil(String nom, String email) {
+        //appelle d'abord la méthode de la superclasse
+        super.modifierProfil(nom, email);
+        // Logique supplémentaire spécifique à Employee
+        System.out.println("Mise à jour spécifique du profil Employee pour: " + nom);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Personnel ines = new RH("Ines Ines", "ines@entreprise.com");
+        Personnel khelil = new Employee("Khelil Khelil", "khelil@entreprise.com");
+
+        ines.modifierProfil("Ines I.", "ines.i@entreprise.com");
+        khelil.modifierProfil("Khelil K.", "khelil.k@entreprise.com");
+    }
+}

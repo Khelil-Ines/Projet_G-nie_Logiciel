@@ -1,0 +1,91 @@
+// Interface EventListener
+public interface EventListener {
+    void update(String data);
+}
+
+// classe EventManager
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class EventManager {
+    Map<String, List<EventListener>> listeners = new HashMap<>();
+
+    public void subscribe(String eventType, EventListener listener) {
+        if (!listeners.containsKey(eventType)) {
+            listeners.put(eventType, new ArrayList<>());
+        }
+        listeners.get(eventType).add(listener);
+    }
+
+    public void unsubscribe(String eventType, EventListener listener) {
+        if (listeners.containsKey(eventType)) {
+            listeners.get(eventType).remove(listener);
+        }
+    }
+
+    public void notify(String eventType, String data) {
+        if (listeners.containsKey(eventType)) {
+            for (EventListener listener : listeners.get(eventType)) {
+                listener.update(data);
+            }
+        }
+    }
+}
+
+// classe congé
+public class Conge {
+    EventManager events;
+
+    public Conge() {
+        this.events = new EventManager();
+    }
+
+    public void changeEtat(String etat) {
+        // Simule le changement d'état du congé
+        // Notifie les observateurs du changement d'état
+        events.notify("Changement d'état", etat);
+    }
+
+    public void triggerChange(String etat) {
+        changeEtat(etat);
+    }
+}
+
+// classe Employe
+
+public class Employee implements EventListener {
+    private String name;
+
+    public Employee(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void update(String data) {
+        System.out.println(name + " recevoir mise à jour: " + data);
+    }
+}
+//  Utilisation du code : classe main
+public class Main {
+    public static void main(String[] args) {
+        Conge conge = new Conge();
+        Employee employee1 = new Employee("Ines Ines");
+        Employee employee2 = new Employee("Khelil Khelil");
+
+        // S'abonner aux notifications de changement d'état du congé
+        conge.events.subscribe("Changement d'état", employee1);
+        conge.events.subscribe("Changement d'état", employee2);
+
+        // Déclencher un changement d'état
+        conge.triggerChange("Congé approuvé");
+
+        // Se désabonner
+        conge.events.unsubscribe("Changement d'état", employee2);
+
+        // Déclencher un autre changement d'état
+        conge.triggerChange("Congé refusé");
+    }
+}
+

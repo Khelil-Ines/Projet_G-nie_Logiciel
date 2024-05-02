@@ -1,0 +1,101 @@
+import java.util.Arrays;
+
+class Utilisateur {
+    protected String nom;
+    protected String email;
+
+    public Utilisateur(String nom, String email) {
+        this.nom = nom;
+        this.email = email;
+    }
+}
+
+class RH extends Utilisateur {
+    public RH(String nom, String email) {
+        super(nom, email);
+    }
+
+    public Projet creerProjet(String nomProjet, Client client) {
+        return new Projet(nomProjet, client);
+    }
+
+    public Client creerClient(String nom, String details) {
+        return new Client(nom, details);
+    }
+
+    public Equipe formerEquipe(List<Employee> membres) {
+        return new Equipe(membres);
+    }
+
+    public void assignerEquipeAuProjet(Equipe equipe, Projet projet) {
+        projet.setEquipe(equipe);
+    }
+}
+
+class Projet {
+    String nom;
+    Client client;
+    Equipe equipe;
+
+    public Projet(String nom, Client client) {
+        this.nom = nom;
+        this.client = client;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+}
+
+class Client extends Utilisateur{
+    String nom;
+    String details;
+
+    public Client(String nom, String details) {
+        this.nom = nom;
+        this.details = details;
+    }
+}
+
+class Equipe {
+    List<Employee> membres;
+
+    public Equipe(List<Employee> membres) {
+        this.membres = membres;
+    }
+}
+
+class Employee extends Utilisateur {
+    public Employee(String nom, String email) {
+        super(nom, email);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Création d'un objet RH
+        RH rh = new RH("Ines Khelil", "ines.khelil@entreprise.com");
+
+        // Création d'un client
+        Client client = rh.creerClient("XYZ", "Entreprise de technologie");
+
+        // Création de quelques employés
+        Employee emp1 = new Employee("Ines Ines", "ines.ines@entreprise.com");
+        Employee emp2 = new Employee("Khelil Khelil", "khelil.khelil@entreprise.com");
+
+        // Former une équipe avec les employés créés
+        Equipe equipe = rh.formerEquipe(Arrays.asList(emp1, emp2));
+
+        // Créer un projet et assigner le client et l'équipe à ce projet
+        Projet projet = rh.creerProjet("Projet", client);
+        rh.assignerEquipeAuProjet(equipe, projet);
+
+        // Affichage des informations du projet pour vérifier que tout est en place
+        System.out.println("Projet: " + projet.nom);
+        System.out.println("Client: " + projet.client.nom);
+        System.out.println("Équipe composée de:");
+        for (Employee membre : equipe.membres) {
+            System.out.println(" - " + membre.nom);
+        }
+    }
+}
