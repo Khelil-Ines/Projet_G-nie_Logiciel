@@ -1,0 +1,14 @@
+public class Projet {
+    private Client client;
+
+    public Projet(Client client) {
+        setClient(client);
+    }
+
+    public void setClient(Client client) {
+        if (client == null) {
+            throw new IllegalArgumentException("Un client est requis pour chaque projet.");
+        }
+        this.client = client;
+    }
+}
