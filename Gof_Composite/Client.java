@@ -4,12 +4,12 @@ public class Client extends User {
     }
     @Override
     public void ajouterComposant(Composant composant) throws Exception {
-        throw new UnsupportedOperationException("Un client ne peut pas contenir d'autres composants.");
+        throw new UnsupportedOperationException("Un client ne peut pas ajouter d'autres composants.");
     }
 
     @Override
     public void supprimerComposant(Composant composant) throws Exception {
-        throw new UnsupportedOperationException("Un client ne peut pas contenir d'autres composants.");
+        throw new UnsupportedOperationException("Un client ne peut pas supprimer d'autres composants.");
     }
 
     @Override

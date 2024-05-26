@@ -11,7 +11,7 @@ public class Equipe implements Composant {
     public Equipe(String nomEquipe, ChefEquipe chefEquipe) {
         this.nomEquipe = nomEquipe;
         this.chefEquipe = chefEquipe;
-        this.ajouterComposant(chefEquipe);  // Ajoute automatiquement le chef à l'équipe
+        this.ajouterComposant(chefEquipe);  
     }
 
 

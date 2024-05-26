@@ -5,12 +5,12 @@ public class Employe extends User {
 
     @Override
     public void ajouterComposant(Composant composant) throws Exception {
-        throw new UnsupportedOperationException("Un employé ne peut pas contenir d'autres composants.");
+        throw new UnsupportedOperationException("Un employé ne peut pas ajouter d'autres composants.");
     }
 
     @Override
     public void supprimerComposant(Composant composant) throws Exception {
-        throw new UnsupportedOperationException("Un employé ne peut pas contenir d'autres composants.");
+        throw new UnsupportedOperationException("Un employé ne peut pas supprimer d'autres composants.");
     }
 
     @Override

@@ -5,12 +5,12 @@ public class ChefEquipe extends Employe {
     
     @Override
     public void ajouterComposant(Composant composant) throws Exception {
-        throw new UnsupportedOperationException("Un chef d’équipet ne peut pas contenir d'autres composants.");
+        throw new UnsupportedOperationException("Un chef d’équipet ne peut pas ajouter d'autres composants.");
     }
 
     @Override
     public void supprimerComposant(Composant composant) throws Exception {
-        throw new UnsupportedOperationException("Un chef d’équipene peut pas contenir d'autres composants.");
+        throw new UnsupportedOperationException("Un chef d’équipene peut pas supprimer d'autres composants.");
     }
 
     @Override
